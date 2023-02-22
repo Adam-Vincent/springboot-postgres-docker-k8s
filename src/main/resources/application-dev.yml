@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/user
+    username: postgres
+    password: asd1028.
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    user: postgres
+    password: asd1028.
+    url: jdbc:postgresql://localhost:5432/user
+    schemas: user
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+
+

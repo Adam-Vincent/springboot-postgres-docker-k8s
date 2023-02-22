@@ -1,7 +1,7 @@
 # springboot-postgres-docker-k8s
 springboot-restful-crud-postgres-docker-k8s
 
-This repo has the following content
+This repo has the following content:
 
 1. restful api
 2. crud with jpa & postgres
@@ -11,4 +11,4 @@ This repo has the following content
 
 AND the junit5 test didn't complete yet
 AND I may build pipeline with Jenkins 
-AND I try to do best practice, so I will continue refactor the code.
+AND I try to do best practice, so I will continue refactoring the code.

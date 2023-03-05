@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface EmailServiceClient {
 
     @GetMapping(value = "/email/{userId}")
-    String buildEmail(@PathVariable String userId);
+    String buildEmail(@PathVariable(value = "userId") String userId);
 
     @Component
     class EmailServiceFallback implements EmailServiceClient{

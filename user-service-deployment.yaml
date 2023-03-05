@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment # Kubernetes resource kind we are creating
+metadata:
+  name: user-service
+spec:
+  selector:
+    matchLabels:
+      app: user-service
+  replicas: 1 # Number of replicas that will be created for this deployment
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+        - env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://database:5432/user
+            - name: SPRING_FLYWAY_URL
+              value: jdbc:postgresql://database:5432/user
+          image: user-service:v1
+          name: user-service
+          ports:
+            - containerPort: 8080
+          resources: { }
+      restartPolicy: Always
+status: { }
+# The port that the container is running on in the cluster

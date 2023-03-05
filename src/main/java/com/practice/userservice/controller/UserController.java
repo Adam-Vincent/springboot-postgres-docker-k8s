@@ -40,13 +40,14 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<User>> getUserDetails(@RequestParam(name = "name", defaultValue = "") String name,
-                                                     @RequestParam(name = "userid", defaultValue = "") String userId,
-                                                     @RequestParam(name = "gender", defaultValue = "") String gender,
-                                                     @RequestParam(name = "min", defaultValue = "") Integer minAge,
-                                                     @RequestParam(name = "max", defaultValue = "") Integer maxAge,
-                                                     @RequestParam(name = "pageNum", defaultValue = "0") Integer pageNum,
-                                                     @RequestParam(name = "pageSize", defaultValue = "2") Integer pageSize) {
+    public ResponseEntity<Page<User>> getUserDetails(
+            @RequestParam(name = "name", defaultValue = "", required = false) String name,
+            @RequestParam(name = "userid", defaultValue = "", required = false) String userId,
+            @RequestParam(name = "gender", defaultValue = "", required = false) String gender,
+            @RequestParam(name = "min", defaultValue = "0", required = false) Integer minAge,
+            @RequestParam(name = "max", defaultValue = "0", required = false) Integer maxAge,
+            @RequestParam(name = "pageNum", defaultValue = "0", required = false) Integer pageNum,
+            @RequestParam(name = "pageSize", defaultValue = "2", required = false) Integer pageSize) {
         return ResponseEntity.ok(userService.getPageList(name, userId, gender, minAge, maxAge, pageNum, pageSize));
     }
 }

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-service
+spec:
+  selector:
+    matchLabels:
+      app: email-service
+  replicas: 1 # Number of replicas that will be created for this deployment
+  template:
+    metadata:
+      labels:
+        app: email-service
+    spec:
+      containers:
+        - image: email:v1
+          name: email-service
+          ports:
+            - containerPort: 8081
+          resources: { }
+      restartPolicy: Always
+status: { }

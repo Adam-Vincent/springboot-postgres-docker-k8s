@@ -31,8 +31,10 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
-    implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '2.0.2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '2.0.2'
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.4.4'
+
 }
 
 dependencyManagement {

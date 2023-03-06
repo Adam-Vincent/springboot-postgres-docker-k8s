@@ -1,5 +1,6 @@
 package com.practice.userservice.models;
 
+import com.practice.userservice.entities.Office;
 import com.practice.userservice.entities.User;
 import lombok.*;
 
@@ -34,6 +35,9 @@ public class UserDto {
     @NotBlank(message = "userId不能为空")
     private String userId;
 
+    @NotBlank
+    private String office;
+
 
     public static UserDto toDto(@NotNull User entity) {
         return UserDto.builder()
@@ -43,6 +47,5 @@ public class UserDto {
                 .age(entity.getAge())
                 .userId(entity.getUserId())
                 .build();
-
     }
 }

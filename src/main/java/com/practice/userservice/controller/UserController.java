@@ -27,6 +27,11 @@ public class UserController {
         return ResponseEntity.ok(userService.saveUser(userDto));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getUserById(@NotNull @PathVariable("id") Long id) throws UserNotFoundException {
+        return ResponseEntity.ok(userService.getUserById(id));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<UserDto> deleteUser(@NotNull @PathVariable("id") Long id) throws UserNotFoundException {
         return ResponseEntity.ok(userService.deleteUserById(id));

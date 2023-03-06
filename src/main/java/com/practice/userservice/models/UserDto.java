@@ -1,7 +1,5 @@
 package com.practice.userservice.models;
 
-import com.practice.userservice.entities.Office;
-import com.practice.userservice.entities.User;
 import lombok.*;
 
 import javax.persistence.GeneratedValue;
@@ -38,14 +36,4 @@ public class UserDto {
     @NotBlank
     private String office;
 
-
-    public static UserDto toDto(@NotNull User entity) {
-        return UserDto.builder()
-                .id(entity.getId())
-                .name(entity.getName())
-                .gender(entity.getGender())
-                .age(entity.getAge())
-                .userId(entity.getUserId())
-                .build();
-    }
 }

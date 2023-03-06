@@ -1,7 +1,9 @@
 package com.practice.userservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.practice.userservice.models.UserDto;
 import lombok.*;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
 
@@ -33,6 +35,28 @@ public class User extends EntityBase {
     private String userId;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JoinColumn(name = "office_id",referencedColumnName = "id")
     private Office office;
+
+    public void patch(UserDto userDto) {
+        if (userDto.getName() != null) {
+            this.name = userDto.getName();
+        }
+        if (userDto.getAge() != null) {
+            this.age = userDto.getAge();
+        }
+        if (userDto.getGender() != null) {
+            this.gender = userDto.getGender();
+        }
+        if (userDto.getUserId() != null) {
+            this.userId = userDto.getUserId();
+        }
+        if (userDto.getOffice() != null) {
+            if (this.office == null) {
+                this.office = new Office();
+            }
+            this.office.setOffice(userDto.getOffice());
+        }
+    }
 }

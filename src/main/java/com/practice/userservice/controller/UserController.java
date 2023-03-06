@@ -6,6 +6,7 @@ import com.practice.userservice.models.UserDto;
 import com.practice.userservice.service.UserService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -37,22 +38,22 @@ public class UserController {
         return ResponseEntity.ok(userService.deleteUserById(id));
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable(name = "id") @NotNull Long id,
-                                           @RequestBody @Validated UserDto userDto
-    ) throws UserNotFoundException {
-        return ResponseEntity.ok(userService.updateUserById(id, userDto));
+                                              @RequestBody @Validated UserDto userDto
+        ) throws UserNotFoundException {
+        return ResponseEntity.ok(userService.updateUser(id, userDto));
     }
 
-    @GetMapping
-    public ResponseEntity<Page<User>> getUserDetails(
-            @RequestParam(name = "name", defaultValue = "", required = false) String name,
-            @RequestParam(name = "userid", defaultValue = "", required = false) String userId,
-            @RequestParam(name = "gender", defaultValue = "", required = false) String gender,
-            @RequestParam(name = "min", defaultValue = "0", required = false) Integer minAge,
-            @RequestParam(name = "max", defaultValue = "0", required = false) Integer maxAge,
-            @RequestParam(name = "pageNum", defaultValue = "0", required = false) Integer pageNum,
-            @RequestParam(name = "pageSize", defaultValue = "2", required = false) Integer pageSize) {
-        return ResponseEntity.ok(userService.getPageList(name, userId, gender, minAge, maxAge, pageNum, pageSize));
+    @GetMapping("/page")
+    public ResponseEntity<Page<User>> getUserPage(
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(name = "userid", required = false) String userId,
+            @RequestParam(name = "gender", required = false) String gender,
+            @RequestParam(name = "min",  required = false) Integer minAge,
+            @RequestParam(name = "max",  required = false) Integer maxAge,
+            @RequestParam(name = "office",  required = false) String office,
+            Pageable pageable) {
+        return ResponseEntity.ok(userService.getPageList(name, userId, gender, minAge, maxAge,office,pageable));
     }
 }

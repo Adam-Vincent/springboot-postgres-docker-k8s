@@ -11,29 +11,26 @@ public class Spec {
 
     private Spec(){}
 
-    public static Specification<User> buildUserSpec(String name, String userId, String gender,Integer minAge,Integer maxAge) {
+    public static Specification<User> buildUserSpec(String name, String userId, String gender,Integer minAge,Integer maxAge,String office) {
         return (root, query, criteriaBuilder) -> {
-            List<Predicate> list = new ArrayList<>();
+            List<Predicate> predicates = new ArrayList<>();
 
             if (name != null) {
-                Predicate p1 = criteriaBuilder.equal(root.get("name"), name);
-                list.add(p1);
-                Predicate p2 = criteriaBuilder.like(root.get("name").as(String.class), "%" + name + "%");
-                list.add(p2);
+                predicates.add(criteriaBuilder.like(root.get("name"), "%" + name + "%"));
             }
-            if(userId != null) {
-                Predicate predicate = criteriaBuilder.equal(root.get("userId"), userId);
-                list.add(predicate);
+            if (userId != null) {
+                predicates.add(criteriaBuilder.equal(root.get("userId"), userId));
             }
-            if(gender != null) {
-                Predicate predicate = criteriaBuilder.equal(root.get("gender"), gender);
-                list.add(predicate);
+            if (gender != null) {
+                predicates.add(criteriaBuilder.equal(root.get("gender"), gender));
             }
-            if (minAge != 0 && maxAge != 0){
-                Predicate predicate = criteriaBuilder.between(root.get("age").as(Integer.class), minAge, maxAge);
-                list.add(predicate);
+            if (office != null) {
+                predicates.add(criteriaBuilder.equal(root.get("office"), office));
             }
-            return criteriaBuilder.and(list.toArray(new Predicate[0]));
+            if (minAge != null && maxAge != null) {
+                predicates.add(criteriaBuilder.between(root.get("age"), minAge, maxAge));
+            }
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }
 }

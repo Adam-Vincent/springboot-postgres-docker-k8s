@@ -2,6 +2,7 @@ package com.practice.userservice.exceptions;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -11,6 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @RestControllerAdvice
 public class GloabalExceptionHandler {
+
+    @ExceptionHandler(BindException.class)
+    public ErrorResponse validExceptionHandler(BindException e, HttpServletRequest request,
+                                        HttpServletResponse response) {
+        log.error("handle bind exception for api {}: {}",request.getMethod(),request.getRequestURI(),e);
+        return buildErrorResponse(response);
+    }
 
     @ExceptionHandler(Exception.class)
     public ErrorResponse globleExcpetionHandler(Exception e, HttpServletRequest request, HttpServletResponse response) {

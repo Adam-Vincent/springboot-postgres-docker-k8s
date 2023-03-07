@@ -37,6 +37,7 @@ public class User extends EntityBase {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JoinColumn(name = "office_id",referencedColumnName = "id")
+    @ToString.Exclude
     private Office office;
 
     public void patch(UserDto userDto) {

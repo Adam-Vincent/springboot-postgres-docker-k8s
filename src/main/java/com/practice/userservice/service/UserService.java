@@ -52,17 +52,13 @@ public class UserService {
 
     public UserDto deleteUserById(Long id) throws EntityNotFoundException {
         Optional<User> userDeleted;
-        userDeleted = findUserById(id);
+        userDeleted = userRepository.findById(id);
         if(userDeleted.isPresent()){
             userRepository.deleteById(id);
             return modelMapper.map(userDeleted,UserDto.class);
         }else {
             throw new EntityNotFoundException("User not found");
         }
-    }
-
-    public Optional<User> findUserById(Long id) {
-        return userRepository.findById(id);
     }
 
     public UserDto updateUser(Long id, UserDto userDto) {

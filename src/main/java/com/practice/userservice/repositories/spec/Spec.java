@@ -28,7 +28,7 @@ public class Spec {
                 predicates.add(criteriaBuilder.equal(root.get("office"), office));
             }
             if (minAge != null && maxAge != null) {
-                predicates.add(criteriaBuilder.between(root.get("age"), minAge, maxAge));
+                predicates.add(criteriaBuilder.between(root.get("age").as(Integer.class), minAge, maxAge));
             }
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };

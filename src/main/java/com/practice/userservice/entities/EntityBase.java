@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @MappedSuperclass
+@EnableJpaAuditing
 @EntityListeners(AuditingEntityListener.class)
 public class EntityBase {
     @Column(name = "create_at")

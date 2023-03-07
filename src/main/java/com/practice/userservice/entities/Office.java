@@ -22,5 +22,6 @@ public class Office {
     private String office;
 
     @OneToMany(mappedBy = "office")
+    @ToString.Exclude
     private List<User> users;
 }

@@ -1,7 +1,7 @@
 package com.practice.userservice.controller;
 
 import com.practice.userservice.entities.User;
-import com.practice.userservice.exceptions.UserNotFoundException;
+import com.practice.userservice.exceptions.EntityNotFoundException;
 import com.practice.userservice.models.UserDto;
 import com.practice.userservice.service.UserService;
 import org.springframework.context.annotation.ComponentScan;
@@ -29,19 +29,19 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUserById(@NotNull @PathVariable("id") Long id) throws UserNotFoundException {
+    public ResponseEntity<UserDto> getUserById(@NotNull @PathVariable("id") Long id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UserDto> deleteUser(@NotNull @PathVariable("id") Long id) throws UserNotFoundException {
+    public ResponseEntity<UserDto> deleteUser(@NotNull @PathVariable("id") Long id) {
         return ResponseEntity.ok(userService.deleteUserById(id));
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable(name = "id") @NotNull Long id,
                                               @RequestBody @Validated UserDto userDto
-        ) throws UserNotFoundException {
+        ) {
         return ResponseEntity.ok(userService.updateUser(id, userDto));
     }
 

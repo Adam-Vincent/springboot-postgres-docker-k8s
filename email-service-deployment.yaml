@@ -13,7 +13,7 @@ spec:
         app: email-service
     spec:
       containers:
-        - image: email:v1
+        - image: beyourcharon/email-service:v2
           name: email-service
           ports:
             - containerPort: 8081

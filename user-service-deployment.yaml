@@ -18,7 +18,7 @@ spec:
               value: jdbc:postgresql://database:5432/user
             - name: SPRING_FLYWAY_URL
               value: jdbc:postgresql://database:5432/user
-          image: user-service:v1
+          image: beyourcharon/user-service:v2
           name: user-service
           ports:
             - containerPort: 8080
